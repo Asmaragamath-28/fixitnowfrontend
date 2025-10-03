@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixItNow Customer Dashboard</title>
+    
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; 
+            color: #E0E0E0; 
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #9333ea; 
+        }
+
+        .nav-links a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 5px 0;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #a855f7; 
+        }
+
+        .nav-links .logout-btn {
+            border: 1px solid #44ef4d;
+            border-radius: 4px;
+            padding: 5px 12px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links .logout-btn:hover {
+            background-color: #44ef44;
+            color: #fff;
+        }
+
+       
+        .location-banner {
+            background-color: #161fa3; 
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        @media (min-width: 640px) {
+            .location-banner {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .location-banner h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+
+        .location-banner p {
+            font-size: 1.1em;
+            margin: 0;
+        }
+        
+        .location-banner .location-text {
+            font-weight: bold;
+            color: #fde047;
+        }
+
+        .location-banner button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: #2240c5; 
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .location-banner button:hover {
+            background-color: #10b981;
+        }
+
+       
+        .instant-request {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .instant-request h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .instant-request button {
+            background-color: #3edc26; 
+            color: white;
+            font-weight: 900;
+            font-size: 1.2em;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 9999px;
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.4);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .instant-request button:hover {
+            background-color: #b91c1c;
+            transform: scale(1.05);
+        }
+
+       
+        .service-header {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        
+        .service-card {
+            background-color: #1e1e1e; 
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            border-top: 5px solid var(--card-color, #9333ea); 
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px rgba(147, 51, 234, 0.5);
+        }
+
+        
+        .service-icon {
+            font-size: 5em; 
+            margin-bottom: 15px;
+        }
+       
+
+        .service-card h3 {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--card-color, #9333ea);
+            margin: 0 0 8px 0;
+        }
+
+        .service-card p {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        
+
+        .book-btn {
+            width: 100%;
+            background-color: #9333ea; 
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .book-btn:hover {
+            background-color: #a855f7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="header">
+            <div class="logo">FixItNow</div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">My Bookings</a>
+                <a href="#">Update Profile</a>
+                <a href="#" class="logout-btn">Log out</a>
+            </nav>
+        </header>
+
+        <div class="location-banner">
+            <div>
+                <h1>Welcome back! 👋</h1>
+                <p>
+                    Your Service Area: <span id="user-location" class="location-text">Fetching location...</span>
+                </p>
+            </div>
+            <button onclick="alert('Change Location feature will be implemented soon.')">
+                Change Location
+            </button>
+        </div>
+
+        <div class="instant-request">
+            <h2>Need help *now*? Post a service request instantly.</h2>
+            <button id="post-request-btn">
+                POST NEW SERVICE REQUEST 🚀
+            </button>
+        </div>
+
+        <h2 class="service-header">Browse Verified Service Categories</h2>
+        <div id="service-grid" class="service-grid">
+            </div>
+
+    </div>
+
+    <script>
+        
+        const serviceCategories = [
+            { name: 'Electrical Services', description: 'Professional electrical repairs, installations, and maintenance.', icon: '⚡', avgRating: 4.7, nearbyProviders: 15, color: '#3b82f6' },  // blue
+            { name: 'Plumbing Services', description: 'Expert plumbing solutions including pipe repairs and emergency services.', icon: '💧', avgRating: 4.9, nearbyProviders: 22, color: '#06b6d4' },   // cyan
+            { name: 'Handyman Services', description: 'General home maintenance, furniture assembly, mounting, and small repairs.', icon: '🔨', avgRating: 4.6, nearbyProviders: 30, color: '#f97316' },   // orange
+            { name: 'Home Cleaning', description: 'Deep cleaning, regular house cleaning, and specialty cleaning services.', icon: '🧼', avgRating: 4.8, nearbyProviders: 25, color: '#f43f5e' },    // rose/pink
+            { name: 'AC Services', description: 'Complete air conditioning repair, maintenance, and installation services.', icon: '❄️', avgRating: 4.5, nearbyProviders: 10, color: '#4f46e5' },   // indigo
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceGrid = document.getElementById('service-grid');
+            const userLocationElement = document.getElementById('user-location');
+            const postRequestBtn = document.getElementById('post-request-btn');
+
+            
+            setTimeout(() => {
+                userLocationElement.textContent = 'Chennai, Tamil Nadu';
+            }, 1500);
+
+            
+            postRequestBtn.addEventListener('click', () => {
+                alert('Redirecting to the Quick Service Request form to post your need instantly.');
+            });
+
+            
+
+           
+            serviceCategories.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.style.setProperty('--card-color', service.color);
+                
+               
+                card.innerHTML = `
+                    <div>
+                        <p class="service-icon">${service.icon}</p>
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <button data-service-name="${service.name}" class="book-btn">
+                            BOOK NOW
+                        </button>
+                    </div>
+                `;
+                
+                serviceGrid.appendChild(card);
+            });
+
+            
+            document.querySelectorAll('.book-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const serviceName = e.target.getAttribute('data-service-name');
+                    alert(`Redirecting to the booking page for: ${serviceName}.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
